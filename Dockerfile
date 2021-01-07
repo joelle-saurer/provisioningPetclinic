@@ -6,7 +6,7 @@ RUN java -version
 
 RUN mkdir /opt/tomcat/
 WORKDIR /opt/tomcat
-RUN wget -O https://mirror.novg.net/apache/tomcat/tomcat-8/v8.5.61/bin/apache-tomcat-8.5.61.tar.gz
+RUN wget -O https://ftp.nluug.nl/internet/apache/tomcat/tomcat-8/v8.5.61/bin/apache-tomcat-8.5.61.tar.gz
 RUN tar xvfz apache*.tar.gz
 RUN mv apache-tomcat-8.5.61/* /opt/tomcat/.
 
