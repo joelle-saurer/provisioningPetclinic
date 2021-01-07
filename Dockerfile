@@ -14,7 +14,9 @@ RUN wget https://ftp.nluug.nl/internet/apache/tomcat/tomcat-8/v8.5.61/bin/apache
 RUN tar xvfz apache*.tar.gz
 RUN mv apache-tomcat-8.5.61/* /opt/tomcat/.
 
-ADD /opt/source-code/petclinics.war /opt/tomcat/apache-tomcat-8.5.61/webapps
+WORKDIR /opt/source-code
+ADD petclinics.war /opt/tomcat/apache-tomcat-8.5.61/webapps
+
 WORKDIR /opt/tomcat/webapps
 
 EXPOSE 8080
