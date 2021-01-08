@@ -19,7 +19,7 @@ ADD petclinics.war /opt/tomcat/apache-tomcat-8.5.61/webapps
 
 WORKDIR /opt/tomcat/webapps
 
-EXPOSE 8080
+EXPOSE 9292
 
 CMD /opt/tomcat/bin/catalina.sh start
 
