@@ -21,7 +21,7 @@ WORKDIR /opt/tomcat/webapps
 
 EXPOSE 8080
 
-CMD /opt/tomcat/apache-tomcat-8.5.61/bin/catalina.sh run
+#CMD /opt/tomcat/apache-tomcat-8.5.61/bin/catalina.sh run
 
 #FROM Ubuntu
 
