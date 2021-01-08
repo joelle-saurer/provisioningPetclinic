@@ -15,19 +15,9 @@ RUN tar xvfz apache*.tar.gz
 RUN mv apache-tomcat-8.5.61/* /opt/tomcat/.
 
 WORKDIR /opt/source-code
-ADD petclinics.war /opt/tomcat/apache-tomcat-8.5.61/webapps
+ADD petclinics.war /opt/tomcat/webapps
 
 WORKDIR /opt/tomcat/webapps
 
 CMD /opt/tomcat/bin/catalina.sh start
 
-#FROM Ubuntu
-
-#RUN apt-get update && apt-get -y install python3
-#install python dependencies
-#COPY . /pot/source-code
-
-#CMD ["5"]
-
-#ENTRYPOINT ["sleep"]
-#ENTRYPOINT NAME_APP = /opt/source-code/app.py name run
