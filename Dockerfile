@@ -20,7 +20,7 @@ ADD petclinics.war /opt/tomcat/apache-tomcat-8.5.61/webapps
 WORKDIR /opt/tomcat/webapps
 
 EXPOSE 8080
-
+CMD ["sleep", "60"]
 #CMD /opt/tomcat/apache-tomcat-8.5.61/bin/catalina.sh run
 
 #FROM Ubuntu
