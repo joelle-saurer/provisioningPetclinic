@@ -27,10 +27,11 @@
       pip:
         name: docker
 
-    - name: Pull an image
-      docker_image:
-        name: joellesaurer/petclinic
-        source: pull
+- name: Pull image
+  docker_container:
+    name: tomcatcontainer
+    state: present
+    image: joellesaurer/petclinic
 
     # - name: Create testing container
     #   docker_container:
