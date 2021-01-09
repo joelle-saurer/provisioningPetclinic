@@ -29,8 +29,8 @@
 
     - name: Pull an image
       docker_image:
-      name: joellesaurer/petclinic
-      source: pull
+        name: joellesaurer/petclinic
+        source: pull
 
     # - name: Create testing container
     #   docker_container:
