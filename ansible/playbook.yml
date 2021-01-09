@@ -3,35 +3,49 @@
   become: true
 
   tasks:
-    - name: Install aptitude using apt
-      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+  #install dependencies
+  - name: install dependencies
+        apt:
+          name: aptitude
+          state: present
+          update_cache: yes
+        loop:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+          - python3-pip
+          - python3-setuptools
 
-    - name: Install required system packages
-      apt: name={{ item }} state=latest update_cache=yes
-      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+#install GPG
+    - name: add GPG key
+          apt_key:
+            url: https://download.docker.com/linux/ubuntu/gpg
+            state: present
 
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+#install apt key repository
+    - name: add docker repository to apt
+          apt_repository:
+            repo: deb https://download.docker.com/linux/ubuntu xenial stable
+            state: present
 
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu xenial stable
-        state: present
+#install docker
 
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
-
+    
     - name: Install Docker Module for Python
       pip:
         name: docker
+        state: started
+        enabled: yes
 
-    - name: Pull image
-      docker_container:
-        name: tomcatcontainer
-        state: present
-        image: joellesaurer/petclinic
+    # - name: Pull image
+    #   docker_image:
+    #     image: joellesaurer/petclinic
+    #     tag: latest
+    #     source: pull 
 
     # - name: Create testing container
     #   docker_container:
