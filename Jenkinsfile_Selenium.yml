@@ -7,16 +7,23 @@ pipeline {
     }
 
     stages {   
-        stage('Start Application') {
-            steps {
-
-              echo 'deploy application'
-              sh 'mvn deploy -Dmaven.install.skip=true'
-
-              echo 'Running the Selenium test'
-              sh "python3 '/var/lib/jenkins/workspace/seleniumProvisioning/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
+        stage('Launch Application') {
+            parallel {
+                stage('Launch petclinic') { 
+                    steps {
+ 
+                    echo 'deploy application'
+                    sh 'mvn deploy -Dmaven.install.skip=true'
+                    }
+                }
+                
+                stage('Functional test of web application') { 
+                    steps {
+                    echo 'Running the Selenium test'
+                    sh "python3 '/home/azureuser/petclinic/spring-framework-petclinic/test_petclinic.py'"
+                    }
+                }    
             }
         }
-
     }
 }
