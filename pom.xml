@@ -2,9 +2,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.springframework.samples</groupId>
-    <artifactId>spring-framework-petclinic</artifactId>
-    <version>5.3.2</version>
+    <groupId>devOpsTraineeship</groupId>
+    <artifactId>petclinic</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>Spring Framework Petclinic</name>
     <packaging>war</packaging>
@@ -247,6 +247,17 @@
             <version>${junit-jupiter.version}</version>
         </dependency>
         <dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>3.141.59</version>
+		</dependency>
+        <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.1</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
@@ -293,8 +304,6 @@
 
     <!-- Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
     <build>
-        <defaultGoal>install</defaultGoal>
-        <finalName>petclinic</finalName>
         <resources>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
@@ -311,22 +320,41 @@
             </testResource>
         </testResources>
         <plugins>
+        	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.2.1</version>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
-            </plugin>
-
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>**/*Tests.java</include>
-                    </includes>
-                </configuration>
+				<configuration>
+                    <shutdown>kill</shutdown>
+				</configuration>
             </plugin>
+
+
+			<plugin> 
+				<groupId>org.apache.tomcat.maven</groupId> 
+				<artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> 
+				<configuration> 
+				  <url>http://40.114.35.24:8080/manager</url>
+				</configuration> 
+			</plugin>
+
+
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -552,5 +580,18 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
+	<distributionManagement>
+      <repository>
+	    <id>nexus-deploy</id>
+	    <url>http://40.114.35.24:8081/repository/petclinic-REL/</url>
+	    <layout>default</layout>
+	  </repository>
+	  <snapshotRepository>
+        <id>nexus-deploy</id>
+	    <url>http://40.114.35.24:8081/repository/petclnic-SNAP/</url>
+	    <layout>default</layout>
+      </snapshotRepository>
+  
 
+    </distributionManagement>
 </project>
