@@ -7,23 +7,24 @@ pipeline {
     }
 
     stages {   
-        stage('Launch Application') {
-            parallel {
-                stage('Launch petclinic') { 
-                    steps {
- 
-                    echo 'deploy application'
-                    sh 'mvn deploy -Dmaven.install.skip=true'
-                    }
-                }
+        stage('Launch petclinic') { 
+            steps {
+                echo 'Starting the ec2 server'
+                echo 'create ssh key pair to connect with ec2 server'
+                sh 'ssh key-gen -R 18.135.116.31'
                 
-                stage('Functional test of web application') { 
-                    steps {
-                    echo 'Running the Selenium test'
-                    sh "python3 '/home/azureuser/petclinic/spring-framework-petclinic/test_petclinic.py'"
-                    }
-                }    
+                echo 'launch provisioning tool'
+                sh 'cd ~/Provisioning/ansible; ansible-playbook playbook.yml'
+
+              }
             }
-        }
+                
+        stage('Functional test of web application') { 
+            steps {
+              echo 'Running the Selenium test'
+              sh "python3 '/home/azureuser/petclinic/spring-framework-petclinic/test_petclinic.py'"
+            }
+        }    
+       
     }
 }
