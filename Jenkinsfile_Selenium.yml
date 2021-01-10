@@ -1,0 +1,26 @@
+pipeline {
+    
+    agent any
+ 
+    tools {
+        maven "Maven"
+    }
+
+    stages {   
+        stage('Start Application') {
+            steps {
+            #   echo 'Starting the ec2 server'
+            #   echo 'create ssh key pair to connect with ec2 server'
+            #   sh 'ssh key-gen -R 18.135.116.31'
+            #   echo 'launch provisioning tool'
+            #   sh 'cd ~/Provisioning/ansible; ansible-playbook playbook.yml'
+              echo 'deploy application'
+              sh 'mvn deploy -Dmaven.install.skip=true'
+              
+              echo 'Running the Selenium test'
+              sh "python3 '/var/lib/jenkins/workspace/seleniumProvisioning/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
+            }
+        }
+
+    }
+}

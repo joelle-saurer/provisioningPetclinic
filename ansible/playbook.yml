@@ -47,6 +47,7 @@
     #     tag: latest
     #     source: pull 
 
+#Create images for the environments 
     # - name: Create testing container
     #   docker_container:
     #     name: "Testing environment"
