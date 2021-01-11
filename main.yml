@@ -1,0 +1,31 @@
+---
+- hosts: all
+  gather_facts: True
+  become: True
+
+  tasks:
+    - name: Install python pip3
+        apt:
+            name: pip3
+            state: present
+  
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+    
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+        state: started
+        enabled: yes    
+        
+    - name: start container
+      docker_container:
+        name: petclinic
+        image: "joellesaurer/petclinic:latest"
+        state: started
+        published_ports: ??
+
+  vars:
+  #install python3
+
+  roles:

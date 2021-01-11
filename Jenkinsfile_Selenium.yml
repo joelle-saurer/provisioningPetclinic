@@ -12,7 +12,7 @@ pipeline {
                 echo 'Starting the ec2 server'
                 echo 'create ssh key pair to connect with ec2 server'
                 sh 'ssh key-gen -R 18.135.116.31'
-                
+
                 echo 'launch provisioning tool'
                 sh 'cd ~/Provisioning/ansible; ansible-playbook playbook.yml'
 
@@ -22,7 +22,7 @@ pipeline {
         stage('Functional test of web application') { 
             steps {
               echo 'Running the Selenium test'
-              sh "python3 '/home/azureuser/petclinic/spring-framework-petclinic/test_petclinic.py'"
+              sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
             }
         }    
        
