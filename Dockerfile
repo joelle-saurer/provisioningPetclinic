@@ -1,7 +1,7 @@
 FROM tomcat:8
 LABEL maintainer=”joelle.saurer@devoteam.com
 
-ADD petclinics.war /opt/tomcat/webapps
+ADD petclinics.war /usr/local/tomcat/webapps/
 
 EXPOSE 8086
 
