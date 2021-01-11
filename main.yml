@@ -21,11 +21,6 @@
     - name: start container
       docker_container:
         name: petclinic
-        image: "joellesaurer/petclinic:latest"
+        image: "joellesaurer/pettomcat:latest"
         state: started
-        published_ports: ??
-
-  vars:
-  #install python3
-
-  roles:
+   
