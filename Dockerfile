@@ -5,7 +5,7 @@ ADD petclinics.war /usr/local/tomcat/webapps/
 
 EXPOSE 8086
 
-CMD /opt/tomcat/bin/catalina.sh start
+CMD /usr/local/tomcat/bin/catalina.sh start
 
 
 
