@@ -1,8 +1,7 @@
-[ec2dev]
-18.135.116.31
+[dev]
+35.176.123.165 
 
-[ec2:vars]
-ansible_ssh_user=ec2-user
+[dev:vars]
+ansible_ssh_user=ubuntu
 ansible_ssh_private_key=~/.ssh/id_rsa
 
-myenvironment=development
