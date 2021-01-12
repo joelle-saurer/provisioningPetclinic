@@ -4,7 +4,7 @@ LABEL maintainer="joelle.saurer@devoteam.com"
 
 ADD petclinics.war /usr/local/tomcat/webapps/
 
-EXPOSE 8080
+EXPOSE 8086
 
 CMD /usr/local/tomcat/bin/catalina.sh start
 
