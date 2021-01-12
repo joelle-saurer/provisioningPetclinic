@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: dev
   gather_facts: True
   become: True
 
@@ -38,21 +38,9 @@
         name: docker
 
 
-- hosts: dev
-  tasks:
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/pettomcat
+        name: joellesaurer/petclinics
         source: pull 
-    
-    - name: Create tomcat container
-      docker_container:
-        name: tomcat
-        image: joellesaurer/pettomcat
-        command: catalina.sh start
-        ports: 8086
-        state: present
-   
-- hosts: acc
+        state: present 
 
-- hosts: prod
