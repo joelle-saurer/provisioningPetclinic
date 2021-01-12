@@ -1,0 +1,27 @@
+pipeline {
+    
+    agent any
+ 
+    tools {
+        maven "Maven"
+    }
+
+    stages {   
+        stage('Launch petclinic') { 
+            steps {
+                echo 'Starting the AWS dev server using ansible tool'
+           
+                sh 'cd ~/Provisioning/ansible; ansible-playbook playbook.yml'
+
+              }
+            }
+                
+        stage('Functional test of web application') { 
+            steps {
+              echo 'Running the Selenium test'
+              sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
+            }
+        }    
+       
+    }
+}
