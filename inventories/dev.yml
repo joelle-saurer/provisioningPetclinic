@@ -1,7 +1,7 @@
 [dev]
 35.176.123.165 
 
-[dev:vars]
+[all:vars]
 ansible_ssh_user=ubuntu
 ansible_ssh_private_key=home/azureuser/.ssh/id_rsa
 
