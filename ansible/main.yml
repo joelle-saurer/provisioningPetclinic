@@ -39,6 +39,7 @@
 
 
 - hosts: dev
+  tasks:
     - name: Pull the Docker image
       docker_image:
         name: joellesaurer/pettomcat
