@@ -36,9 +36,7 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
-    
-    - name: Check if container is running
-        shell: docker ps -a
+
 
 - hosts: dev
     - name: Pull the Docker image
