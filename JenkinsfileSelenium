@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Starting the AWS dev server using ansible tool'
            
-                sh 'cd /home/azureuser/Provisioning/ansible; ansible-playbook playbook.yml'
+                sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook playbook.yml'
 
               }
             }
