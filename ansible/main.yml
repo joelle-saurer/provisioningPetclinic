@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: all
   gather_facts: True
   become: True
 
@@ -36,11 +36,24 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+    
+    - name: Check if container is running
+        shell: docker ps -a
 
+- hosts: dev
     - name: Pull the Docker image
       docker_image:
         name: joellesaurer/pettomcat
         source: pull 
     
-  
+    - name: Create tomcat container
+      docker_container:
+        name: tomcat
+        image: joellesaurer/pettomcat
+        command: catalina.sh start
+        ports: 8086
+        state: present
    
+- hosts: acc
+
+- hosts: prod
