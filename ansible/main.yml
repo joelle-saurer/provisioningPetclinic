@@ -1,7 +1,6 @@
 ---
 - hosts: localhost
   gather_facts: True
-  remote_user: azureuser
 
   tasks:
     - name: update apt caches
