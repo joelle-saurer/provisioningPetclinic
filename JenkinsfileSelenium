@@ -13,7 +13,7 @@ pipeline{
                     steps {
                         echo 'Starting the AWS dev server using ansible tool'
                 
-                        sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
+                        sh 'ssh-keygen -R 35.176.123.165; cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
 
                     }
                 }
