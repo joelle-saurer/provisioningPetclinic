@@ -8,20 +8,23 @@ pipeline {
 
     stages {   
         stage('Launch petclinic') { 
-            steps {
-                echo 'Starting the AWS dev server using ansible tool'
-           
-                sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
-
-              }
-            }
+            parallel{
+                stage('start AWS server') 
+                    steps {
+                        echo 'Starting the AWS dev server using ansible tool'
                 
-        stage('Functional test of web application') { 
-            steps {
-              echo 'Running the Selenium test'
-              sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
+                        sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
+
+                    }
+                }
+                
+                stage('Functional test of web application') { 
+                    steps {
+                        echo 'Running the Selenium test'
+                        sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
+                    }
+                }    
             }
-        }    
-       
+        }       
     }
 }
