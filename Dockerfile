@@ -21,7 +21,7 @@ WORKDIR /home/azureuser/Provisioning
 ADD petclinics.war /opt/tomcat/webapps
 
 WORKDIR /opt/tomcat/webapps
-CMD /opt/tomcat/bin/catalina.sh start
+CMD /opt/tomcat/bin/catalina.sh run 
 
 EXPOSE 8080
 

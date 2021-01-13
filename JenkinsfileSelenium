@@ -22,7 +22,7 @@ pipeline{
                     steps {
                         sh 'cd /home/azureuser/petclinic/spring-framework-petclinic; ./wait'
                         echo 'Running the Selenium test'
-                        sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
+                        sh "python3 '/var/lib/jenkins/workspace/seleniumTest/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
                     }
                 }    
             }
