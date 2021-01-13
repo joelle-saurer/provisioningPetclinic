@@ -5,8 +5,7 @@ RUN apt-get -y install openjdk-8-jdk wget
 RUN java -version
 
 #install necessary pipeline tools
-RUN apt-get -y install maven
-RUN apt-get -y install git
+RUN apt-get -y install maven && apt-get -y install git
 
 EXPOSE 8086
 
