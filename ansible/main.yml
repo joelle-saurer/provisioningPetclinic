@@ -49,7 +49,8 @@
     - name: create container
       docker_container:
           name: cotainerSelenium
-          image: joellesaurer/petclinics:first
+          image: joellesaurer/tomcatdeploy:latest
+          published_ports: "8086:8080"
           command: sleep 300
           state: present
     
@@ -61,7 +62,7 @@
 
     - name: Tag and push to docker hub
       docker_image:
-        name: joellesaurer/petclinics:first
+        name: joellesaurer/tomcatdeploy:latest
         tag: 1.0
         push: yes
 
