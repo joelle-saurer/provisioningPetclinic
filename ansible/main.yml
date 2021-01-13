@@ -55,7 +55,7 @@
     
     - name: Tag and push to docker hub
       docker_image:
-        name: joellesaurer/petclinics
+        name: joellesaurer/petclinics:first
         tag: 1.0
         push: yes
 
