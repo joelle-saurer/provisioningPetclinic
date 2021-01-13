@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: localhost
   gather_facts: True
   become: True
 
