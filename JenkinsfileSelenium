@@ -1,4 +1,4 @@
-pipeline {
+pipeline{
     
     agent any
  
@@ -9,7 +9,7 @@ pipeline {
     stages {   
         stage('Launch petclinic') { 
             parallel{
-                stage('start AWS server') 
+                stage('start AWS server') { 
                     steps {
                         echo 'Starting the AWS dev server using ansible tool'
                 
@@ -17,7 +17,7 @@ pipeline {
 
                     }
                 }
-                
+               
                 stage('Functional test of web application') { 
                     steps {
                         echo 'Running the Selenium test'
