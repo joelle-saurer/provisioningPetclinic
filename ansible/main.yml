@@ -45,6 +45,13 @@
         source: pull 
         state: present 
 
+  #run the image
+    - name: create container
+
+
+
+    - push 
+
   #OR you build the image IN the playbook
         # tasks:
   #   - name: create build directory
