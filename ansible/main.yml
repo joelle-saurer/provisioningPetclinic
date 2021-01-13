@@ -47,7 +47,7 @@
 
   #run the image
     - name: create container
-        docker_container:
+      docker_container:
           name: cotainerSelenium
           image: joellesaurer/petclinics:first
           command: sleep 300
