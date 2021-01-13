@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: localhost
   gather_facts: True
   become: True
 
@@ -49,7 +49,7 @@
     - name: create container
       docker_container:
           name: cotainerSelenium
-          image: joellesaurer/tomcatdeploy:latest
+          image: joellesaurer/devenv:latest
           published_ports: "8086:8080"
           command: sleep 300
           state: present
@@ -62,7 +62,7 @@
 
     - name: Tag and push to docker hub
       docker_image:
-        name: joellesaurer/tomcatdeploy:latest
+        name: joellesaurer/devenv:latest
         tag: 1.0
         push: yes
 
