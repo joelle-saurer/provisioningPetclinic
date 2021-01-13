@@ -53,7 +53,11 @@
           command: sleep 300
           state: present
     
-
+    - name: Tag and push to docker hub
+      docker_image:
+        name: joellesaurer/petclinics
+        tag: 1.0
+        push: yes
 
 
   #OR you build the image IN the playbook
