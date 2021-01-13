@@ -7,8 +7,22 @@ RUN java -version
 #install necessary pipeline tools
 RUN apt-get -y install maven && apt-get -y install git
 
+#install tomcat
+RUN mkdir /opt/tomcat/
+WORKDIR /opt/tomcat
+
+RUN wget https://ftp.nluug.nl/internet/apache/tomcat/tomcat-8/v8.5.61/bin/apache-tomcat-8.5.61.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.5.61/* /opt/tomcat/.
+
+#add war file to tomcat webapps
+ADD . /home/azureuser/Provisioning
+WORKDIR /home/azureuser/Provisioning
+ADD petclinics.war /opt/tomcat/webapps
+
+WORKDIR /opt/tomcat/webapps
+CMD /opt/tomcat/bin/catalina.sh start
+
 EXPOSE 8086
 
-ADD . /home/azureuser/Provisioning
-CMD cd /home/azureuser/Provisioning; mvn tomcat7:run 
 
