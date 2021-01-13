@@ -4,8 +4,6 @@
   become: True
 
   tasks:
-    - name: update apt caches
-      apt: update_cache=yes force_apt_get=yes
       
     - name: Install required system packages
       apt: 
@@ -19,6 +17,9 @@
           - virtualenv
           - python3-setuptools
         state: present
+    
+    - name: update apt caches
+      apt: update_cache=yes force_apt_get=yes
 
     - name: Add Docker GPG apt Key
       apt_key:
