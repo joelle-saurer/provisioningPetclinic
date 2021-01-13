@@ -20,6 +20,7 @@ pipeline{
                
                 stage('Functional test of web application') { 
                     steps {
+                        sh 'cd /home/azureuser/petclinic/spring-framework-petclinic; ./wait'
                         echo 'Running the Selenium test'
                         sh "python3 '/home/azureuser/Provisioning/test_petclinic.py'"
                     }
