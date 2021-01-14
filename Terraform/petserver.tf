@@ -1,12 +1,20 @@
-# Configure the Azure Provider
-provider "azurerm" {
-  # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
-  version = "=2.40.0"
-  features {}
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 2.70"
+    }
+  }
 }
 
-# Create a resource group
-resource "azurerm_resource_group" "petclinic" {
-  name     = "devopsgroup"
-  location = "West Europe"
+provider "aws" {
+  profile = "default"
+  region  = "eu-east-1"
+  access_key = "AKIAJTWHUZ5W4P6PSNOA"
+  secret_key = "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"
+}
+
+resource "aws_instance" "localhost" {
+  ami           = "ami-0885b1f6bd170450c"
+  instance_type = "t2.micro"
 }
