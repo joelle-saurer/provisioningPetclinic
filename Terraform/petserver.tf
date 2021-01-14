@@ -148,19 +148,14 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         version   = "latest"
     }
     
-    os_profile { 
-        computer_name  = "localhost"
-        admin_username = "azureuser"
-    }
-    
-    os_profile_linux_config {
-        disable_password_authentication = true
-        ssh_keys{ 
-            path = "/home/azureuser/.ssh/authorized_keys"
-            key_data = file("~/.ssh/azure.pub")
-        }
-    }
+    computer_name  = "localhost"
+    admin_username = "azureuser"
+    disable_password_authentication = true
 
+    admin_ssh_key {
+        username       = "azureuser"
+        public_key     = tls_private_key.example_ssh.public_key_openssh
+    }
 
     boot_diagnostics {
         storage_account_uri = azurerm_storage_account.storageaccount.primary_blob_endpoint
