@@ -50,3 +50,50 @@ resource "azurerm_public_ip" "terraformpublicip" {
         environment = "Terraform Demo"
     }
 }
+
+#Create network security group
+resource "azurerm_network_security_group" "terraformnsg" {
+    name                = "myNetworkSecurityGroup"
+    location            = "westeurope"
+    resource_group_name = azurerm_resource_group.rg.name
+
+    security_rule {
+        name                       = "SSH"
+        priority                   = 1001
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "22"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+#Create virtual network interface
+resource "azurerm_network_interface" "terraformnic" {
+    name                        = "myNIC"
+    location                    = "westeurope"
+    resource_group_name         = azurerm_resource_group.rg.name
+
+    ip_configuration {
+        name                          = "NicConfiguration"
+        subnet_id                     = azurerm_subnet.terraformsubnet.id
+        private_ip_address_allocation = "Dynamic"
+        public_ip_address_id          = azurerm_public_ip.terraformpublicip.id
+    }
+
+    tags = {
+        environment = "Terraform Demo"
+    }
+}
+
+# Connect the security group to the network interface
+resource "azurerm_network_interface_security_group_association" "nisg" {
+    network_interface_id      = azurerm_network_interface.terraformnic.id
+    network_security_group_id = azurerm_network_security_group.terraformnsg.id
+}
