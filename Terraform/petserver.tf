@@ -9,12 +9,12 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = "us-west-1"
   access_key = "AKIAIAZQETEYOFOF6EEQ"
   secret_key = "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"
 }
 
 resource "aws_instance" "localhost" {
-  ami           = "ami-0885b1f6bd170450c"
+  ami           = "ami-00831fc7c1e3ddc60"
   instance_type = "t2.micro"
 }
