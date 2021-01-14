@@ -14,4 +14,7 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = "petclinic"
   location = "westeurope"
+  tags = {
+      environment = "Terraform Demo"
+  }
 }
