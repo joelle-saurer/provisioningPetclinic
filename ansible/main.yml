@@ -43,8 +43,8 @@
 
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/petclinics
-        tag: first
+        name: joellesaurer/devenv
+        tag: latest
         source: pull 
         state: present 
 
@@ -53,8 +53,8 @@
       docker_container:
           name: cotainerSelenium
           image: joellesaurer/devenv:latest
+          command: /opt/tomcat/bin/catalina.sh run
           published_ports: "8086:8080"
-          command: sleep 300
           state: present
     
     - name: Log into DockerHub
@@ -65,7 +65,7 @@
 
     - name: Tag and push to docker hub
       docker_image:
-        name: joellesaurer/devenv:latest
+        name: joellesaurer/devenv
         tag: 1.0
         push: yes
 
