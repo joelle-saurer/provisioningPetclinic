@@ -158,7 +158,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "file" {
-        source      = "main.yml"
+        source      = "/home/azureuser/Provisioning/ansible/main.yml"
         destination = "/tmp/main.yml"
     }
 
