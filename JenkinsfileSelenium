@@ -10,7 +10,9 @@ pipeline{
         stage('Startup virtual machine with Terraform') {
             steps{ 
                 sh 'cd /home/azureuser/Provisioning/Terraform/; terraform init; terraform apply -auto-approve'
-            
+            }
+        }
+        
         stage('Launch petclinic') { 
             parallel{
                 stage('create dev environment') { 
