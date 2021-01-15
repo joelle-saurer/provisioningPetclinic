@@ -13,18 +13,7 @@ pipeline{
             }
         }
 
-        stage('Launch petclinic') { 
-            parallel{
-                stage('create dev environment') { 
-                    steps {
-                        echo 'provision dev env and run app'
-                
-                        sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
-
-                    }
-                }
-               
-                stage('Run Jmeter Test') { 
+        stage('Run Jmeter Test') { 
                     steps {
                         sh '/opt/jmeter/apache-jmeter-5.4/bin/jmeter -n -t /home/azureuser/petclinic/spring-framework-petclinic/LoadTestPet.jmx -l /var/lib/jenkins/workspace/jmeterTest/src/test/jmeter/LoadTestResult.jtl' 
              

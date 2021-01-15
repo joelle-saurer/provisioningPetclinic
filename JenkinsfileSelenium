@@ -13,18 +13,7 @@ pipeline{
             }
         }
 
-        stage('Launch petclinic') { 
-            parallel{
-                stage('create dev environment') { 
-                    steps {
-                        echo 'provision dev env and run app'
-                
-                        sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
-
-                    }
-                }
-               
-                stage('Functional test of web application') { 
+        stage('Functional test of web application') { 
                     steps {
                         sh 'cd /home/azureuser/petclinic/spring-framework-petclinic; ./wait'
                         echo 'Running the Selenium test'
