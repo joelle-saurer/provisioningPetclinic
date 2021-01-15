@@ -156,6 +156,14 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     tags = {
         environment = "Terraform Demo"
     }
+
+    provisioner "file" {
+        source      = "main.yml"
+        destination = "/tmp/main.yml"
+    }
+
+
+
 }
 
 # #run ansible-playbook
