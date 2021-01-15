@@ -14,18 +14,20 @@ chrome_options.add_argument("--headless")
 
 
 class TestPetclinic():
-  def test_setup(self, method):
+      
+  @pytest.fixture()    
+  def method(self):
     self.driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver", options=chrome_options)
     self.vars = {}
   
   def test_teardown(self, method):
     self.driver.quit()
   
-  def test_petclinic(self):
+  def test_petclinic(self, method):
     # Test name: Petclinic
     # Step # | name | target | value
     # 1 | open | /petclinics/ | 
-    self.driver.get("http://40.114.35.24:8080/petclinics/")
+    self.driver.get("http://137.117.245.158:8086/petclinics/")
     # 2 | setWindowSize | 1450x786 | 
     self.driver.set_window_size(1450, 786)
     # 3 | click | css=li:nth-child(2) > a | 
@@ -65,9 +67,6 @@ class TestPetclinic():
     self.driver.find_element(By.CSS_SELECTOR, "tr:nth-child(3) > td").click()
     print('Title is: ' + self.driver.title)
 
-TestClass = TestPetclinic()
-TestClass.test_setup("")
-TestClass.test_petclinic()
-print ("Test is executed")
-TestClass.test_teardown("")
+
+
 
