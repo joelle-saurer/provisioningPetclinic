@@ -134,8 +134,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     resource_group_name   = azurerm_resource_group.rg.name
     network_interface_ids = [azurerm_network_interface.terraformnic.id]
     size                  = "Standard_DS1_v2"
-    admin_username        = "azureuser"
-    disable_password_authentication = true
+
 
     os_disk {
         name              = "myOsDisk"
@@ -150,9 +149,13 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         version   = "latest"
     }
     
+    computer_name  = "localhost"
+    admin_username = "azureuser"
+    disable_password_authentication = true
+
     admin_ssh_key {
-        username   = "azureuser"
-        public_key = file("~/.ssh/id_rsa.pub")
+        username       = "azureuser"
+        public_key     = tls_private_key.example_ssh.public_key_openssh
     }
 
     boot_diagnostics {
