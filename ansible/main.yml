@@ -65,7 +65,7 @@
 
     - name: Tag and push to docker hub
       docker_image:
-        name: joellesaurer/devenv
+        name: joellesaurer/devenv:latest
         tag: 1.0
         push: yes
 
