@@ -12,7 +12,7 @@ pipeline{
                 sh 'cd /home/azureuser/Provisioning/Terraform/; terraform init; terraform apply -auto-approve'
             }
         }
-        
+
         stage('Launch petclinic') { 
             parallel{
                 stage('create dev environment') { 
@@ -28,10 +28,16 @@ pipeline{
                     steps {
                         sh 'cd /home/azureuser/petclinic/spring-framework-petclinic; ./wait'
                         echo 'Running the Selenium test'
-                        sh "python3 '/var/lib/jenkins/workspace/seleniumTest/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
+                        sh "pytest -s -v --html=report.html '/var/lib/jenkins/workspace/seleniumTest/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
                     }
                 }    
             }
-        }       
+        }  
+        
+        stage('Destroy Terraform VM') { 
+            steps{
+                sh 'cd /home/azureuser/Provisioning/Terraform/; terraform destroy -auto-approve'
+            }
+        }      
     }
 }
