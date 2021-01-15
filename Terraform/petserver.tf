@@ -158,35 +158,35 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 }
 
-#run ansible-playbook
-resource "null_resource" "ansible" {
+# #run ansible-playbook
+# resource "null_resource" "ansible" {
 
-  # Generate ansible dynamic inventory python script. Host IP is replaced by ip address of new vm
-  provisioner "local-exec" {
-    command = "./generate_inv.sh $hostname $ip"
-    environment = {
-      hostname = "${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}"
-      ip = "${element(azurerm_linux_virtual_machine.ansible.*.private_ip_address, count.index)}"
-    }
-  }
+#   # Generate ansible dynamic inventory python script. Host IP is replaced by ip address of new vm
+#   provisioner "local-exec" {
+#     command = "./generate_inv.sh $hostname $ip"
+#     environment = {
+#       hostname = "${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}"
+#       ip = "${element(azurerm_linux_virtual_machine.ansible.*.private_ip_address, count.index)}"
+#     }
+#   }
   
-  # Run the ansible playbook
-  provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i $file resolv_correction.yml"
-    environment = {
-      file = "/tmp/${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}.py"
-    }
-  }
+#   # Run the ansible playbook
+#   provisioner "local-exec" {
+#     command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i $file resolv_correction.yml"
+#     environment = {
+#       file = "/tmp/${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}.py"
+#     }
+#   }
 
-  # Delete the temporarily script file created in above step
-  provisioner "local-exec" {
-    command = "rm -f $file"
-    environment = {
-      file = "/tmp/${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}.py"
-    }
-  }
+#   # Delete the temporarily script file created in above step
+#   provisioner "local-exec" {
+#     command = "rm -f $file"
+#     environment = {
+#       file = "/tmp/${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}.py"
+#     }
+#   }
 
-  depends_on = [
-    azurerm_linux_virtual_machine.ansible,
-  ]
-}
+#   depends_on = [
+#     azurerm_linux_virtual_machine.ansible,
+#   ]
+# }
