@@ -1,5 +1,5 @@
 [localhost]
-104.46.42.247
+20.67.113.136
 
 [all:vars]
 ansible_ssh_user=azureuser
