@@ -7,11 +7,15 @@ pipeline{
     }
 
     stages {   
+        stage('Startup virtual machine with Terraform') {
+            steps{ 
+                sh 'cd /home/azureuser/Provisioning/Terraform/; terraform init; terraform apply -auto-approve'
+            
         stage('Launch petclinic') { 
             parallel{
-                stage('start AWS server') { 
+                stage('create dev environment') { 
                     steps {
-                        echo 'Starting the AWS dev server using ansible tool'
+                        echo 'provision dev env and run app'
                 
                         sh 'cd /home/azureuser/Provisioning/ansible/; ansible-playbook main.yml'
 
