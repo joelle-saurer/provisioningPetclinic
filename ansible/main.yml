@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: localhost #Azure Terraform VM
   gather_facts: True
   become: True
 
@@ -43,31 +43,21 @@
 
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/devenv
-        tag: latest
+        name: joellesaurer/petclinic
+        tag: devenv
         source: pull 
         state: present 
 
   #run the image
     - name: create container
       docker_container:
-          name: cotainerSelenium
-          image: joellesaurer/devenv:latest
+          name: containerSelenium
+          image: joellesaurer/petclinic:devenev
           command: /opt/tomcat/bin/catalina.sh run
           published_ports: "8086:8080"
           state: present
     
-    - name: Log into DockerHub
-      docker_login:
-        username: joellesaurer
-        password: saurer4335
-        email: docker@docker.io
 
-    - name: Tag and push to docker hub
-      docker_image:
-        name: joellesaurer/devenv:latest
-        tag: 1.0
-        push: yes
 
 
   #OR you build the image IN the playbook
