@@ -163,21 +163,21 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type     = "ssh"
             user     = "azureuser"
-            host = "52.157.160.27"
+            host = azurerm_public_ip.myPublicIP
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
         }
     }
 
-    provisioner "remote-exec" {
-        inline = [
-        "sudo apt update",
-        "sudo apt install software-properties-common",
-        "sudo apt-add-repository --yes --update ppa:ansible/ansible",
-        "sudo apt install ansible"
-        ]
-    }
+    # provisioner "remote-exec" {
+    #     inline = [
+    #     "sudo apt update",
+    #     "sudo apt install software-properties-common",
+    #     "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+    #     "sudo apt install ansible"
+    #     ]
+    # }
 }
 
 
