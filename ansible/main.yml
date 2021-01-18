@@ -49,10 +49,10 @@
         state: present 
 
   #run the image
-    - name: create container
+    - name: run container
       docker_container:
           name: containerSelenium
-          image: joellesaurer/petclinic:devenev
+          image: joellesaurer/petclinic:devenv
           command: /opt/tomcat/bin/catalina.sh run
           published_ports: "8086:8080"
           state: present
