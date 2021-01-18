@@ -1,7 +1,4 @@
 [localhost]
-137.117.245.158
-
-[production]
 40.114.35.24
 
 [localhost:vars]
