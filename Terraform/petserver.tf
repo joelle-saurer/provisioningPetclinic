@@ -163,7 +163,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type     = "ssh"
             user     = "azureuser"
-            host = "137.117.245.158"
+            host = "52.157.160.27"
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
