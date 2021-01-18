@@ -156,25 +156,26 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     tags = {
         environment = "Terraform Demo"
     }
+}
+
+# run ansible-playbook
+resource "google_compute_instance" "ansible" {
 
     provisioner "file" {
         source      = "/home/azureuser/Provisioning/ansible/main.yml"
-        destination = "/tmp/main.yml"
+        destination = "/home/azureuser/main.yml"
+        connection {
+            type     = "ssh"
+            user     = "azureuser"
+            private_key = "${file("~/.ssh/id_rsa")}"
+            agent = False
+            timeout = "30s"
+        }
     }
-
-
-
 }
 
-# #run ansible-playbook
-# resource "null_resource" "ansible" {
 
-#   # Generate ansible dynamic inventory python script. Host IP is replaced by ip address of new vm
-#   provisioner "local-exec" {
-#     command = "./generate_inv.sh $hostname $ip"
-#     environment = {
-#       hostname = "${element(azurerm_linux_virtual_machine.ansible.*.name, count.index)}"
-#       ip = "${element(azurerm_linux_virtual_machine.ansible.*.private_ip_address, count.index)}"
+
 #     }
 #   }
   
