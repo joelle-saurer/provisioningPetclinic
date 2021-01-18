@@ -156,10 +156,6 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     tags = {
         environment = "Terraform Demo"
     }
-}
-
-# run ansible-playbook
-resource "google_compute_instance" "ansible" {
 
     provisioner "file" {
         source      = "/home/azureuser/Provisioning/ansible/main.yml"
@@ -173,6 +169,7 @@ resource "google_compute_instance" "ansible" {
         }
     }
 }
+
 
 
 
