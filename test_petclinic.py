@@ -17,7 +17,7 @@ class TestPetclinic():
       
   @pytest.fixture()    
   def method(self):
-    self.driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver", options=chrome_options)
+    self.driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chrome_options)
     self.vars = {}
   
   def test_teardown(self, method):
