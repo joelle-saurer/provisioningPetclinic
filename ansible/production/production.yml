@@ -1,13 +1,13 @@
 ---
-- hosts: localhost
+- hosts: localhost #Azure Terraform VM
   gather_facts: True
   tasks:
 
 
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/devenv
-        tag: latest
+        name: joellesaurer/petclinic
+        tag: devenv
         source: pull 
         state: present 
     
@@ -17,8 +17,8 @@
         password: saurer4335
         email: docker@docker.io
 
-    - name: Tag and push to docker hub
+    - name: Tag and push to docker hub #This might already pull and tag the image specified below and pushes it with the prodenv tag.
       docker_image:
-        name: joellesaurer/devenv:latest
+        name: joellesaurer/petclinic:devenv
         tag: prodenv
         push: yes

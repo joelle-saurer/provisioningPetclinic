@@ -12,7 +12,7 @@ provider "azurerm" {
 
 #Create resource group
 resource "azurerm_resource_group" "rg" {
-  name     = "Traineeship"
+  name     = "MyResourceGroup"
   location = "westeurope"
   tags = {
       environment = "Terraform Demo"
@@ -41,7 +41,7 @@ resource "azurerm_subnet" "terraformsubnet" {
 
 #Create public IP address
 resource "azurerm_public_ip" "terraformpublicip" {
-    name                         = "deployforsel"
+    name                         = "testsel"
     location                     = "westeurope"
     resource_group_name          = azurerm_resource_group.rg.name
     allocation_method            = "Static"
