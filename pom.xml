@@ -583,12 +583,12 @@
 	<distributionManagement>
       <repository>
 	    <id>nexus-deploy</id>
-	    <url>http://40.114.35.24:8081/repository/petclinic-REL/</url>
+	    <url>http://localhost:8082/repository/pet-REL/</url>
 	    <layout>default</layout>
 	  </repository>
 	  <snapshotRepository>
         <id>nexus-deploy</id>
-	    <url>http://40.114.35.24:8081/repository/petclnic-SNAP/</url>
+	    <url>http://localhost:8082/repository/pet-SNAP/</url>
 	    <layout>default</layout>
       </snapshotRepository>
   
