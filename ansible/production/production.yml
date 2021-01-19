@@ -6,7 +6,7 @@
 
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/petclinic
+        name: joellesaurer/petclinics
         tag: devenv
         source: pull 
         state: present 
@@ -19,6 +19,6 @@
 
     - name: Tag and push to docker hub #This might already pull and tag the image specified below and pushes it with the prodenv tag.
       docker_image:
-        name: joellesaurer/petclinic:devenv
+        name: joellesaurer/petclinics:devenv
         tag: prodenv
         push: yes
