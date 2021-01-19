@@ -83,7 +83,7 @@ resource "azurerm_network_interface" "terraformnic" {
     ip_configuration {
         name                          = "NicConfiguration"
         subnet_id                     = azurerm_subnet.terraformsubnet.id
-        private_ip_address_allocation = "Dynamic"
+        private_ip_address_allocation = "Static"
         public_ip_address_id          = azurerm_public_ip.terraformpublicip.id
     }
 
@@ -122,7 +122,7 @@ resource "azurerm_storage_account" "storageaccount" {
 
 #Create Virtual Machine
 resource "azurerm_linux_virtual_machine" "terraformvm" {
-    name                  = "localhost"
+    name                  = "petserver"
     location              = "westeurope"
     resource_group_name   = azurerm_resource_group.rg.name
     network_interface_ids = [azurerm_network_interface.terraformnic.id]
@@ -132,7 +132,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
 
     admin_ssh_key {
         username   = "azureuser"
-        public_key = file("/home/azureuser/.ssh/id_rsa.pub")
+        public_key = file("/home/joelle/.ssh/id_rsa.pub")
     }
 
     os_disk {
@@ -158,7 +158,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "file" {
-        source      = "/home/azureuser/Provisioning/ansible/main.yml"
+        source      = "/home/joelle/Provisioning/ansible/main.yml"
         destination = "/home/azureuser/main.yml"
         connection {
             type     = "ssh"
@@ -170,22 +170,22 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         }
     }
 
-    provisioner "remote-exec" {
-        inline = [
-        "sudo apt update",
-        "sudo apt install software-properties-common",
-        "sudo apt-add-repository --yes --update ppa:ansible/ansible"
-        # "sudo apt install ansible"
-        ]
-        connection {
-            type     = "ssh"
-            user     = "azureuser"
-            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
-            private_key = "${file("~/.ssh/id_rsa")}"
-            agent = false
-            timeout = "30s"
-        }
-    }
+    # provisioner "remote-exec" {
+    #     inline = [
+    #     "sudo apt update",
+    #     "sudo apt install software-properties-common",
+    #     "sudo apt-add-repository --yes --update ppa:ansible/ansible"
+    #     # "sudo apt install ansible"
+    #     ]
+    #     connection {
+    #         type     = "ssh"
+    #         user     = "azureuser"
+    #         host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+    #         private_key = "${file("~/.ssh/id_rsa")}"
+    #         agent = false
+    #         timeout = "30s"
+    #     }
+    # }
 }
 
 
