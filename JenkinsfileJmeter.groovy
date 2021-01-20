@@ -9,7 +9,7 @@ pipeline{
     stages {   
         stage('Startup virtual machine with Terraform') {
             steps{ 
-                sh 'cd /home/azureuser/Provisioning/Terraform/; terraform init; terraform apply -auto-approve'
+                sh 'cd /home/joelle/provisioning/Terraform/; terraform init; terraform apply -auto-approve'
             }
         }
 
