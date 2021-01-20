@@ -6,7 +6,7 @@
 
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/petclinics
+        name: joellesaurer/petclinics:devenv
 
     
     - name: Log into DockerHub
