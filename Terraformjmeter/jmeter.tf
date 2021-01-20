@@ -169,18 +169,18 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
             timeout = "30s"
         }
     }
-    
+
     provisioner "remote-exec" {
         inline = ["sudo dnf -y install python"]
 
         connection {
             type        = "ssh"
             user        = "azureuser"
-            private_key = "${file(var.ssh_key_private)}"
+            private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
 
     provisioner "local-exec" {
-        command = "ansible-playbook -u azureuser -i '${self.public_ip},' --private-key ${var.ssh_key_private} main.yml" 
+        command = "ansible-playbook -u azureuser -i ${file("/home/joelle/.ssh/id_rsa.pub")} --private-key ${file("~/.ssh/id_rsa")} main.yml" 
     }
 }
