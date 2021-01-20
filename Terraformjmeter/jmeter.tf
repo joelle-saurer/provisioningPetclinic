@@ -169,3 +169,4 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
             timeout = "30s"
         }
     }
+}
