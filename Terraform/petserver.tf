@@ -170,6 +170,20 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         }
     }
 
+    provisioner "remote-exec" {
+        inline = ["sudo dnf -y install python"]
+
+        connection {
+            type        = "ssh"
+            user        = "azureuser"
+            private_key = "${file(var.ssh_key_private)}"
+        }
+    }
+
+    provisioner "local-exec" {
+        command = "ansible-playbook -u fedora -i '${self.public_ip},' --private-key ${var.ssh_key_private} main.yml" 
+    }
+
     # provisioner "remote-exec" {
     #     inline = [
     #     "sudo apt update",
