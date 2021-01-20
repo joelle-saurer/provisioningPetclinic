@@ -181,25 +181,9 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "local-exec" {
-        command = "ansible-playbook -u fedora -i '${self.public_ip},' --private-key ${var.ssh_key_private} main.yml" 
+        command = "ansible-playbook -u azureuser -i '${self.public_ip},' --private-key ${var.ssh_key_private} main.yml" 
     }
 
-    # provisioner "remote-exec" {
-    #     inline = [
-    #     "sudo apt update",
-    #     "sudo apt install software-properties-common",
-    #     "sudo apt-add-repository --yes --update ppa:ansible/ansible"
-    #     # "sudo apt install ansible"
-    #     ]
-    #     connection {
-    #         type     = "ssh"
-    #         user     = "azureuser"
-    #         host = "${azurerm_public_ip.terraformpublicip.ip_address}"
-    #         private_key = "${file("~/.ssh/id_rsa")}"
-    #         agent = false
-    #         timeout = "30s"
-    #     }
-    # }
 }
 
 
