@@ -10,5 +10,5 @@
           name: containerSelenium
           image: ubuntu
           ports: 
-            - "8086:8080"
+            - "8088:8080"
           state: started
