@@ -14,6 +14,7 @@
       docker_container:
           name: containerSelenium
           image: joellesaurer/petclinics:devenv
+          command: /opt/tomcat/bin/catalina.sh run 
           ports: 
             - "8088:8080"
           state: present
