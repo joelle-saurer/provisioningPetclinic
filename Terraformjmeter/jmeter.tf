@@ -171,7 +171,11 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "remote-exec" {
-        inline = ["sudo apt install python"]
+        inline = [
+            "sudo apt install software-properties-common",
+            "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+            "sudo apt install ansible",
+        ]
 
         connection {
             type        = "ssh"
