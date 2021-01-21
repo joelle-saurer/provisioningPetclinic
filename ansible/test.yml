@@ -3,7 +3,12 @@
   gather_facts: True
 
   tasks:
-   
+    - name: Pull the Docker image
+      docker_image:
+        name: joellesaurer/petclinics
+        tag: devenv
+        source: pull 
+        state: present 
   #run the image
     - name: run container
       docker_container:
