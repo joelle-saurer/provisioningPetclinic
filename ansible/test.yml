@@ -1,0 +1,22 @@
+---
+- hosts: localhost #Azure Terraform VM
+  gather_facts: True
+  become: True
+
+  tasks:
+   
+    - name: Pull the Docker image
+      docker_image:
+        name: joellesaurer/petclinics
+        tag: devenv
+        source: pull 
+        state: present 
+
+  #run the image
+    - name: run container
+      docker_container:
+          name: containerSelenium
+          image: joellesaurer/petclinics:devenv
+          command: /opt/tomcat/bin/catalina.sh run
+          published_ports: "8086:8080"
+          state: present
