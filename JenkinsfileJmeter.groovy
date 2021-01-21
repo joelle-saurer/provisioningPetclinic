@@ -15,7 +15,7 @@ pipeline{
 
         stage('Run Jmeter Test') { 
                     steps {
-                        sh '/opt/jmeter/apache-jmeter-5.4/bin/jmeter -n -t /home/azureuser/petclinic/spring-framework-petclinic/LoadTestPet.jmx -l /var/lib/jenkins/workspace/jmeterTest/src/test/jmeter/LoadTestResult.jtl' 
+                        sh '/opt/jmeter/apache-jmeter-5.4/bin/jmeter -n -t /home/joelle/provisioning/WebPerfPet.jmx -l /var/lib/jenkins/workspace/jmeterTest/src/test/jmeter/LoadTestResult.jtl' 
              
                         sh 'echo Test completed'
                         sh 'echo Publish JMeter reports'
@@ -28,7 +28,7 @@ pipeline{
 
         stage('Destroy Terraform VM') { 
             steps{
-                sh 'cd /home/azureuser/Provisioning/Terraform/; terraform destroy -auto-approve'
+                sh 'cd /home/joelle/provisioning/Terraform/; terraform destroy -auto-approve'
             }
         }     
     }

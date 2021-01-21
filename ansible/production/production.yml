@@ -18,5 +18,6 @@
     - name: Tag and push to docker hub #This might already pull and tag the image specified below and pushes it with the prodenv tag.
       docker_image:
         name: joellesaurer/petclinics:devenv
+        repository: joellesaurer/petclinics
         tag: prodenv
         push: yes
