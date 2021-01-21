@@ -15,9 +15,9 @@ pipeline{
 
         stage('Functional test of web application') { 
                     steps {
-                        sh 'cd /home/azureuser/petclinic/spring-framework-petclinic; ./wait'
+                    
                         echo 'Running the Selenium test'
-                        sh "pytest -s -v --html=report.html '/var/lib/jenkins/workspace/seleniumTest/src/test/java/org/springframework/samples/petclinic/test_petclinic.py'"
+                        sh "pytest -s -v --html=report.html '/home/joelle/petclinic/test_petclinic.py'"
                     }
                 }    
             }
