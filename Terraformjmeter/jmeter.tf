@@ -185,6 +185,19 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         }
     }
 
+    provisioner "remote-exec" {
+        inline = [
+            "ansible-playbook main.yml"
+        ]
+
+        connection {
+            type        = "ssh"
+            user        = "azureuser"
+            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+            private_key = "${file("~/.ssh/id_rsa")}"
+        }
+    }
+
     # provisioner "local-exec" {
     #     command = "ansible-playbook -u azureuser -i ${file("/home/joelle/.ssh/id_rsa.pub")} --private-key ${file("~/.ssh/id_rsa")} main.yml" 
     # }
