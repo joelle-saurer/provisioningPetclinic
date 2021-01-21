@@ -16,6 +16,6 @@
       docker_container:
           name: containerSelenium
           image: joellesaurer/petclinics:test
-          command: /opt/tomcat/bin/catalina.sh run
+          command: run
           published_ports: "8086:8080"
           state: present
