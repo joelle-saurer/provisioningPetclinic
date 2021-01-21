@@ -6,8 +6,7 @@
    
     - name: Pull the Docker image
       docker_image:
-        name: joellesaurer/petclinics
-        tag: test
+        name: joellesaurer/petclinics:test
         source: pull 
         state: present 
 
@@ -17,5 +16,6 @@
           name: containerSelenium
           image: joellesaurer/petclinics:test
           command: run
-          published_ports: "8086:8080"
+          ports: 
+            - "8086:8080"
           state: present
