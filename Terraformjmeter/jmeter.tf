@@ -171,7 +171,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "remote-exec" {
-        inline = ["sudo dnf -y install python"]
+        inline = ["sudo apt install python"]
 
         connection {
             type        = "ssh"
