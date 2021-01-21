@@ -74,6 +74,21 @@ resource "azurerm_network_security_group" "terraformnsg" {
     }
 }
 
+#Create inbound rule for docker container
+resource "azurerm_network_security_rule" "docker" {
+    name                        = "docker"
+    priority                    = 1011
+    direction                   = "Inbound"
+    access                      = "Allow"
+    protocol                    = "Tcp"
+    source_port_range           = "*"
+    destination_port_range      = "*"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+    resource_group_name         = azurerm_resource_group.rg.name
+    network_security_group_name = azurerm_network_security_group.terraformnsg.name
+}
+
 #Create virtual network interface
 resource "azurerm_network_interface" "terraformnic" {
     name                        = "myNIC"
@@ -167,6 +182,34 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
+        }
+    }
+   
+    provisioner "remote-exec" {
+        inline = [
+            "sudo apt install software-properties-common",
+            "sudo apt-add-repository --yes --update ppa:ansible/ansible",
+            "sudo apt -y install ansible",
+        ]
+
+        connection {
+            type        = "ssh"
+            user        = "azureuser"
+            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+            private_key = "${file("~/.ssh/id_rsa")}"
+        }
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "ansible-playbook main.yml"
+        ]
+
+        connection {
+            type        = "ssh"
+            user        = "azureuser"
+            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+            private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
 
