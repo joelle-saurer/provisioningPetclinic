@@ -11,4 +11,4 @@
           image: ubuntu
           ports: 
             - "8086:8080"
-          state: present
+          state: started
