@@ -4,17 +4,11 @@
 
   tasks:
    
-    - name: Pull the Docker image
-      docker_image:
-        name: joellesaurer/petclinics:test
-        source: pull 
-        state: present 
-
   #run the image
     - name: run container
       docker_container:
           name: containerSelenium
-          image: joellesaurer/petclinics:test
+          image: ubuntu
           ports: 
             - "8086:8080"
           state: present
