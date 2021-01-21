@@ -174,7 +174,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         inline = [
             "sudo apt install software-properties-common",
             "sudo apt-add-repository --yes --update ppa:ansible/ansible",
-            "sudo apt install ansible",
+            "sudo apt -y install ansible",
         ]
 
         connection {
