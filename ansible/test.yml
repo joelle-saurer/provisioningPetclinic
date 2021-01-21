@@ -7,7 +7,7 @@
     - name: Pull the Docker image
       docker_image:
         name: joellesaurer/petclinics
-        tag: devenv
+        tag: test
         source: pull 
         state: present 
 
@@ -15,7 +15,7 @@
     - name: run container
       docker_container:
           name: containerSelenium
-          image: joellesaurer/petclinics:devenv
+          image: joellesaurer/petclinics:test
           command: /opt/tomcat/bin/catalina.sh run
           published_ports: "8086:8080"
           state: present
