@@ -98,7 +98,7 @@ resource "azurerm_network_interface" "terraformnic" {
         name                          = "NicConfiguration"
         subnet_id                     = azurerm_subnet.terraformsubnet.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = azurerm_public_ip.terraformpublicip.id
+        public_ip_address_id          = azurerm_public_ip_prefix.test.id
     }
 
     tags = {
