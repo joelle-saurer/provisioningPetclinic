@@ -43,20 +43,11 @@
 
 
     - name: Pull the Docker image
-      docker_image:
-        name: joellesaurer/petclinics
-        tag: devenv
-        source: pull 
-        state: present 
+      shell: docker pull joellesaurer/petclinics:devenv
 
   #run the image
     - name: run container
-      docker_container:
-          name: containerSelenium
-          image: joellesaurer/petclinics:devenv
-          published_ports: "8086:8080"
-          state: present
-    
+      shell: docker run -d -it -p 8086:8080 joellesaurer/petclinics:devenv
 
 
 
