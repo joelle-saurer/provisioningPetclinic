@@ -89,6 +89,21 @@ resource "azurerm_network_security_rule" "docker" {
     network_security_group_name = azurerm_network_security_group.terraformnsg.name
 }
 
+#Create inbound rule for docker container
+resource "azurerm_network_security_rule" "docker" {
+    name                        = "docker"
+    priority                    = 1011
+    direction                   = "Inbound"
+    access                      = "Allow"
+    protocol                    = "Tcp"
+    source_port_range           = "*"
+    destination_port_range      = "8086"
+    source_address_prefix       = "*"
+    destination_address_prefix  = "*"
+    resource_group_name         = azurerm_resource_group.rg.name
+    network_security_group_name = azurerm_network_security_group.terraformnsg.name
+}
+
 #Create virtual network interface
 resource "azurerm_network_interface" "terraformnic" {
     name                        = "myNIC"
