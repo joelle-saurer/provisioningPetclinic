@@ -43,7 +43,7 @@ resource "azurerm_subnet" "terraformsubnet" {
 resource "azurerm_public_ip_prefix" "pubip" {
   name                = "jmeter"
   location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name        = "Static"
+  resource_group_name = azurerm_resource_group.rg.name       
 
     tags = {
         environment = "Terraform Demo"
