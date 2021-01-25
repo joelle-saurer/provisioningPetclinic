@@ -44,6 +44,10 @@ data "azurerm_public_ip" "test" {
   name                = "pubip"
   resource_group_name = "petclinicjmeter"
 }
+
+output "public_ip_address" {
+  value = "${data.azurerm_public_ip.test.ip_address}"
+}
 #Use IP prefix
 #Note: perfixes are used for a RANGE of IP adreeses, startnig with two
 #resource name change in the rest of the file
@@ -113,7 +117,7 @@ resource "azurerm_network_interface" "terraformnic" {
         name                          = "NicConfiguration"
         subnet_id                     = azurerm_subnet.terraformsubnet.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = azurerm_public_ip.test.id
+        public_ip_address_id          = "${data.azurerm_public_ip.test.ip_address}"
     }
 
     tags = {
@@ -192,7 +196,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type     = "ssh"
             user     = "azureuser"
-            host = "${azurerm_public_ip.test.id}"
+            host = "${data.azurerm_public_ip.test.ip_address}"
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
@@ -209,7 +213,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${azurerm_public_ip.test.id}"
+            host = "${data.azurerm_public_ip.test.ip_address}"
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
@@ -222,7 +226,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${azurerm_public_ip.test.id}"
+            host = "${data.azurerm_public_ip.test.ip_address}"
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
