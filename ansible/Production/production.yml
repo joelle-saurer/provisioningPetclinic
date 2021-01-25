@@ -5,19 +5,17 @@
 
 
     - name: Pull the Docker image
-      docker_image:
-        name: joellesaurer/petclinics:devenv
+      shell: docker pull joellesaurer/petclinics:devenv
 
     
     - name: Log into DockerHub
       docker_login:
         username: joellesaurer
         password: saurer4335
-        email: docker@docker.io
+        email: joelle.saurer@devoteam.com
 
-    - name: Tag and push to docker hub 
-      docker_image:
-        name: 2f00b9fb884e
-        repository: joellesaurer/petclinics
-        tag: prodenv
-        push: yes
+    - name: Tag docker image 
+      shell: docker tag joellesaurer/petclinics:devenv joellesaurer/production
+
+    - name: Push docker image
+      shell: docker push joellesaurer/production
