@@ -8,4 +8,4 @@
 
   #run the image
     - name: run container
-      shell: docker run -d -it --name containersel -p 8086:8080 joellesaurer/petclinics:devenv
+      shell: docker run -d -it -p 8086:8080 joellesaurer/petclinics:devenv
