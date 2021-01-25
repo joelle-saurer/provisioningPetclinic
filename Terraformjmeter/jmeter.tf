@@ -11,12 +11,9 @@ provider "azurerm" {
 }
 
 #Create resource group
-resource "azurerm_resource_group" "rg" {
-  name     = "petclinicjmeter"
-  location = "westeurope"
-  tags = {
-      environment = "Terraform Demo"
-  }
+data "azurerm_resource_group" "rg" {
+  name = "petclinicjmeter"
+ 
 }
 
 #Create virtual network
