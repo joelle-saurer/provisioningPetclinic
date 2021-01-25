@@ -39,17 +39,24 @@ resource "azurerm_subnet" "terraformsubnet" {
     address_prefixes       = ["10.0.2.0/24"]
 }
 
-#Use IP prefix
-resource "azurerm_public_ip" "test" {
+#Use existing IP address
+data "azurerm_public_ip" "test" {
   name                = "pubip"
-  azurerm_public_ip_prefix = "20.71.93.170"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  allocation_method   = "Static"
+  resource_group_name = "petclinicjmeter"
 }
+#Use IP prefix
+#Note: perfixes are used for a RANGE of IP adreeses, startnig with two
+#resource name change in the rest of the file
+# resource "azurerm_public_ip" "test" {
+#   name                = "pubip"
+#   azurerm_public_ip_prefix = "20.71.93.170"
+#   resource_group_name = azurerm_resource_group.rg.name
+#   location            = azurerm_resource_group.rg.location
+#   allocation_method   = "Static"
+# }
 #Create public IP address
 # resource "azurerm_public_ip_prefix" "test" {
-#   name                = "jmeter"
+#   name                = "pubip"
 #   location            = "${azurerm_resource_group.rg.location}"
 #   resource_group_name = "${azurerm_resource_group.rg.name}"
 
