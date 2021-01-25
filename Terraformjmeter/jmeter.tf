@@ -177,7 +177,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type     = "ssh"
             user     = "azureuser"
-            host = "${azurerm_public_ip_prefix.test.ip_address}"
+            host = "${azurerm_public_ip_prefix.test.id}"
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
@@ -194,7 +194,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+            host = "${azurerm_public_ip_prefix.test.id}"
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
@@ -207,7 +207,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${azurerm_public_ip.terraformpublicip.ip_address}"
+            host = "${azurerm_public_ip_prefix.test.id}"
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
