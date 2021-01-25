@@ -21,7 +21,7 @@ resource "azurerm_virtual_network" "terraformnetwork" {
     name                = "myVnet"
     address_space       = ["10.0.0.0/16"]
     location            = "westeurope"
-    resource_group_name = azurerm_resource_group.rg.name
+    resource_group_name = data.azurerm_resource_group.rg.name
 
     tags = {
         environment = "Terraform Demo"
@@ -31,7 +31,7 @@ resource "azurerm_virtual_network" "terraformnetwork" {
 #Create subnet 
 resource "azurerm_subnet" "terraformsubnet" {
     name                 = "mySubnet"
-    resource_group_name  = azurerm_resource_group.rg.name
+    resource_group_name  = data.azurerm_resource_group.rg.name
     virtual_network_name = azurerm_virtual_network.terraformnetwork.name
     address_prefixes       = ["10.0.2.0/24"]
 }
@@ -70,7 +70,7 @@ output "public_ip_address" {
 resource "azurerm_network_security_group" "terraformnsg" {
     name                = "myNetworkSecurityGroup"
     location            = "westeurope"
-    resource_group_name = azurerm_resource_group.rg.name
+    resource_group_name = data.azurerm_resource_group.rg.name
 
     security_rule {
         name                       = "SSH"
@@ -100,7 +100,7 @@ resource "azurerm_network_security_rule" "docker" {
     destination_port_range      = "8086"
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
-    resource_group_name         = azurerm_resource_group.rg.name
+    resource_group_name         = data.azurerm_resource_group.rg.name
     network_security_group_name = azurerm_network_security_group.terraformnsg.name
 }
 
@@ -108,7 +108,7 @@ resource "azurerm_network_security_rule" "docker" {
 resource "azurerm_network_interface" "terraformnic" {
     name                        = "myNIC"
     location                    = "westeurope"
-    resource_group_name         = azurerm_resource_group.rg.name
+    resource_group_name         = data.azurerm_resource_group.rg.name
 
     ip_configuration {
         name                          = "NicConfiguration"
@@ -132,7 +132,7 @@ resource "azurerm_network_interface_security_group_association" "nisg" {
 resource "random_id" "randomId" {
     keepers = {
         # Generate a new ID only when a new resource group is defined
-        resource_group = azurerm_resource_group.rg.name
+        resource_group = data.azurerm_resource_group.rg.name
     }
 
     byte_length = 8
@@ -140,7 +140,7 @@ resource "random_id" "randomId" {
 
 resource "azurerm_storage_account" "storageaccount" {
     name                        = "diag${random_id.randomId.hex}"
-    resource_group_name         = azurerm_resource_group.rg.name
+    resource_group_name         = data.azurerm_resource_group.rg.name
     location                    = "westeurope"
     account_replication_type    = "LRS"
     account_tier                = "Standard"
@@ -154,7 +154,7 @@ resource "azurerm_storage_account" "storageaccount" {
 resource "azurerm_linux_virtual_machine" "terraformvm" {
     name                  = "devserver"
     location              = "westeurope"
-    resource_group_name   = azurerm_resource_group.rg.name
+    resource_group_name   = data.azurerm_resource_group.rg.name
     network_interface_ids = [azurerm_network_interface.terraformnic.id]
     size                  = "Standard_DS1_v2"
     admin_username        = "azureuser"
