@@ -41,6 +41,7 @@ resource "azurerm_subnet" "terraformsubnet" {
 
 #Use IP prefix
 resource "azurerm_public_ip" "test" {
+  name                = "pubip"
   azurerm_public_ip_prefix = "20.71.93.170"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
