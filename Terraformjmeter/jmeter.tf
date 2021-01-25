@@ -39,16 +39,23 @@ resource "azurerm_subnet" "terraformsubnet" {
     address_prefixes       = ["10.0.2.0/24"]
 }
 
-#Create public IP address
-resource "azurerm_public_ip_prefix" "test" {
-  name                = "jmeter"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+#Use IP prefix
+resource "azurerm_public_ip" "example" {
+  azurerm_public_ip_prefix = "20.71.93.170"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  allocation_method   = "Static"
 
-    tags = {
-        environment = "Terraform Demo"
-    }
-}
+#Create public IP address
+# resource "azurerm_public_ip_prefix" "test" {
+#   name                = "jmeter"
+#   location            = "${azurerm_resource_group.rg.location}"
+#   resource_group_name = "${azurerm_resource_group.rg.name}"
+
+#     tags = {
+#         environment = "Terraform Demo"
+#     }
+# }
 
 #Create network security group
 resource "azurerm_network_security_group" "terraformnsg" {
