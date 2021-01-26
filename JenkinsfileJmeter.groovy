@@ -9,7 +9,7 @@ pipeline{
     stages {   
         stage('Startup virtual machine with Terraform') {
             steps{ 
-                sh 'git clone https://github.com/joelle-saurer/provisioningPetclinic.git'
+         
                 sh 'cd /provisioningPetclinic/Terraformjmeter/; terraform init; terraform apply -auto-approve'
             }
         }
