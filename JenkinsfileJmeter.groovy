@@ -9,7 +9,7 @@ pipeline{
     stages {   
         stage('Startup virtual machine with Terraform') {
             steps{ 
-                sh 'cd /home/joelle/provisioning/Terraformjmeter/; terraform init; terraform apply -auto-approve'
+                sh 'cd /var/lib/jenkins/workspace/jmeterProvisioning/Terraformjmeter/; terraform init; terraform apply -auto-approve'
             }
         }
 
@@ -28,7 +28,7 @@ pipeline{
 
         stage('Destroy Terraform VM') { 
             steps{
-                sh 'cd /home/joelle/provisioning/Terraformjmeter/; terraform destroy -auto-approve'
+                sh 'cd /var/lib/jenkins/workspace/jmeterProvisioning/Terraformjmeter/; terraform destroy -auto-approve'
             }
         }     
     }
