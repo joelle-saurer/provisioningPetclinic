@@ -55,6 +55,10 @@ resource "azurerm_subnet" "terraformsubnet" {
 data "azurerm_public_ip" "test" {
   name                = "pubip"
   resource_group_name = "petclinicjmeter"
+
+  timeouts {
+        read = "5m"
+  }
 }
 
 
@@ -153,6 +157,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     size                  = "Standard_DS1_v2"
     admin_username        = "azureuser"
     disable_password_authentication = true
+    
 
     admin_ssh_key {
         username   = "azureuser"
@@ -190,7 +195,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
             host = data.azurerm_public_ip.test.ip_address
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
-            timeout = "30s"
+            timeout = "120s"
         }
     }
 
