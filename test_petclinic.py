@@ -27,7 +27,7 @@ class TestPetclinic():
     # Test name: Petclinic
     # Step # | name | target | value
     # 1 | open | /petclinics/ | 
-    self.driver.get("http://52.142.212.131:8086/petclinics/")
+    self.driver.get("http://20.71.93.170:8086/petclinics/")
     # 2 | setWindowSize | 1450x786 | 
     self.driver.set_window_size(1450, 786)
     # 3 | click | css=li:nth-child(2) > a | 
