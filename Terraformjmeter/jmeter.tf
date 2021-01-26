@@ -195,7 +195,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
             host = data.azurerm_public_ip.test.ip_address
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
-            timeout = "120s"
+            timeout = "400s"
         }
     }
 
