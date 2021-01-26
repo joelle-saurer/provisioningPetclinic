@@ -10,17 +10,19 @@ provider "azurerm" {
   features {}
 }
 
-#Create resource group
+#Use resource group
 data "azurerm_resource_group" "rg" {
   name = "petclinicjmeter"
  
 }
 
-
+#Create resource group
 # resource "azurerm_resource_group" "rg" {
 #   name     = "petclinicjmeter"
 #   location = "westeurope"
 # }
+
+
 
 #Create virtual network
 resource "azurerm_virtual_network" "terraformnetwork" {
@@ -33,6 +35,13 @@ resource "azurerm_virtual_network" "terraformnetwork" {
         environment = "Terraform Demo"
     }
 }
+
+#Use existing subnet
+# data "azurerm_subnet" "subnet" {
+#   name                 = "mySubnet"
+#   virtual_network_name = "myVnet"
+#   resource_group_name  = "petclinicjmeter"
+# }
 
 #Create subnet 
 resource "azurerm_subnet" "terraformsubnet" {
@@ -48,31 +57,8 @@ data "azurerm_public_ip" "test" {
   resource_group_name = "petclinicjmeter"
 }
 
-output "public_ip_address" {
-  value = "${data.azurerm_public_ip.test.ip_address}"
-}
-#Use IP prefix
-#Note: perfixes are used for a RANGE of IP adreeses, startnig with two
-#resource name change in the rest of the file
-# resource "azurerm_public_ip" "test" {
-#   name                = "pubip"
-#   azurerm_public_ip_prefix = "20.71.93.170"
-#   resource_group_name = azurerm_resource_group.rg.name
-#   location            = azurerm_resource_group.rg.location
-#   allocation_method   = "Static"
-# }
 
 
-#Create public IP address
-# resource "azurerm_public_ip_prefix" "test" {
-#   name                = "pubip"
-#   location            = "${azurerm_resource_group.rg.location}"
-#   resource_group_name = "${azurerm_resource_group.rg.name}"
-
-#     tags = {
-#         environment = "Terraform Demo"
-#     }
-# }
 
 #Create network security group
 resource "azurerm_network_security_group" "terraformnsg" {
@@ -122,7 +108,7 @@ resource "azurerm_network_interface" "terraformnic" {
         name                          = "NicConfiguration"
         subnet_id                     = azurerm_subnet.terraformsubnet.id
         private_ip_address_allocation = "Dynamic"
-        public_ip_address_id          = "${data.azurerm_public_ip.test.ip_address}"
+        # public_ip_address_id          = "${data.azurerm_public_ip.test.ip_address}"
     }
 
     tags = {
@@ -201,7 +187,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type     = "ssh"
             user     = "azureuser"
-            host = "${data.azurerm_public_ip.test.ip_address}"
+            host = data.azurerm_public_ip.test.ip_address
             private_key = "${file("~/.ssh/id_rsa")}"
             agent = false
             timeout = "30s"
@@ -218,7 +204,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${data.azurerm_public_ip.test.ip_address}"
+            host = data.azurerm_public_ip.test.ip_address
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
@@ -231,7 +217,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
         connection {
             type        = "ssh"
             user        = "azureuser"
-            host = "${data.azurerm_public_ip.test.ip_address}"
+            host = data.azurerm_public_ip.test.ip_address
             private_key = "${file("~/.ssh/id_rsa")}"
         }
     }
