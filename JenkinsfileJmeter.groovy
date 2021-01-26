@@ -22,8 +22,8 @@ pipeline{
 
                         perfReport '/var/lib/jenkins/workspace/jmeterProvisioning/src/test/jmeter/LoadTestResult.jtl' 
                     }
-                }    
-            }         
+                   
+                     
         } 
 
         stage('Destroy Terraform VM') { 
