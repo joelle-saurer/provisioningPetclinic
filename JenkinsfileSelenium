@@ -17,7 +17,7 @@ pipeline{
                     steps {
                     
                         echo 'Running the Selenium test'
-                        sh "pytest -s -v --html=report.html '/home/joelle/petclinic/test_petclinic.py'"
+                        sh "python -m pytest -s -v --html=report.html '/var/lib/jenkins/workspace/seleniumProvisioning/test_petclinic.py'"
                     }
                 }    
             }
@@ -25,7 +25,7 @@ pipeline{
         
         stage('Destroy Terraform VM') { 
             steps{
-                sh 'cd /home/azureuser/Provisioning/Terraform/; terraform destroy -auto-approve'
+                sh 'cd /home/joelle/provisioning/Terraform/; terraform destroy -auto-approve'
             }
         }      
     }
