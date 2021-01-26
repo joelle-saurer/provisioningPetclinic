@@ -26,7 +26,7 @@ data "azurerm_resource_group" "rg" {
 
 #Create virtual network
 resource "azurerm_virtual_network" "terraformnetwork" {
-    name                = "myVnet"
+    name                = "Vnet"
     address_space       = ["10.0.0.0/16"]
     location            = "westeurope"
     resource_group_name = data.azurerm_resource_group.rg.name
@@ -45,7 +45,7 @@ resource "azurerm_virtual_network" "terraformnetwork" {
 
 #Create subnet 
 resource "azurerm_subnet" "terraformsubnet" {
-    name                 = "mySubnet"
+    name                 = "Subnet"
     resource_group_name  = data.azurerm_resource_group.rg.name
     virtual_network_name = azurerm_virtual_network.terraformnetwork.name
     address_prefixes       = ["10.0.2.0/24"]
@@ -66,7 +66,7 @@ data "azurerm_public_ip" "test" {
 
 #Create network security group
 resource "azurerm_network_security_group" "terraformnsg" {
-    name                = "myNetworkSecurityGroup"
+    name                = "NetworkSecurityGroup"
     location            = "westeurope"
     resource_group_name = data.azurerm_resource_group.rg.name
 
@@ -104,7 +104,7 @@ resource "azurerm_network_security_rule" "docker" {
 
 #Create virtual network interface
 resource "azurerm_network_interface" "terraformnic" {
-    name                        = "myNIC"
+    name                        = "NIC"
     location                    = "westeurope"
     resource_group_name         = data.azurerm_resource_group.rg.name
 
