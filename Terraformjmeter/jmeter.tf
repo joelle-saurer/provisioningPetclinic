@@ -16,6 +16,12 @@ data "azurerm_resource_group" "rg" {
  
 }
 
+
+# resource "azurerm_resource_group" "rg" {
+#   name     = "petclinicjmeter"
+#   location = "westeurope"
+# }
+
 #Create virtual network
 resource "azurerm_virtual_network" "terraformnetwork" {
     name                = "myVnet"
@@ -55,6 +61,8 @@ output "public_ip_address" {
 #   location            = azurerm_resource_group.rg.location
 #   allocation_method   = "Static"
 # }
+
+
 #Create public IP address
 # resource "azurerm_public_ip_prefix" "test" {
 #   name                = "pubip"
