@@ -4,7 +4,7 @@ pipeline{
  
     tools {
         maven "Maven"
-        ansible-playbook "Ansible"
+     
     }
 
     stages {   
