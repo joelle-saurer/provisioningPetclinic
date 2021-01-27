@@ -3,4 +3,3 @@
 
 [localhost:vars]
 ansible_ssh_user=joelle
-ansible_ssh_private_key=/var/lib/jenkins/.ssh/jenkins
