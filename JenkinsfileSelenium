@@ -19,8 +19,8 @@ pipeline{
                         echo 'Running the Selenium test'
                         sh "python -m pytest -s -v --html=report.html '/var/lib/jenkins/workspace/seleniumProvisioning/test_petclinic.py'"
                     }
-                }    
-            }
+                    
+            
         }  
         
         stage('Destroy Terraform VM') { 
