@@ -11,7 +11,7 @@ pipeline{
         stage('Startup virtual machine with Terraform') {
             steps{ 
          
-                sh 'cd /var/lib/jenkins/workspace/jmeterProvisioning/provisioningPetclinic/Terraformjmeter/; terraform init; terraform apply -auto-approve'
+                sh 'cd /var/lib/jenkins/workspace/jmeterProvisioning/Terraformjmeter/; terraform init; terraform apply -auto-approve'
             }
         }
 

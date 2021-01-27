@@ -187,7 +187,7 @@ resource "azurerm_linux_virtual_machine" "terraformvm" {
     }
 
     provisioner "file" {
-        source      = "/home/joelle/provisioning/ansible/main.yml"
+        source      = "/var/lib/jenkins/workspace/jmeterProvisioning/ansible/main.yml"
         destination = "/home/azureuser/main.yml"
         connection {
             type     = "ssh"
