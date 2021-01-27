@@ -4,14 +4,15 @@ pipeline{
  
     tools {
         maven "Maven"
-       
+        ansible-playbook "Ansible"
     }
 
     stages {   
         stage('Release production image') {
             steps{ 
-                                 
-                ansiblePlaybook credentialsId: 'private-key', installation: 'Ansible', inventory: '/var/lib/jenkins/workspace/petProduction/ansible/Production/inventory.yml', playbook: '/var/lib/jenkins/workspace/petProduction/ansible/Production/production.yml'
+                        echo 'Tests are completed, release as production image'
+                
+                        sh 'cd /var/lib/jenkins/workspace/petProduction/ansible/Production/; ansible-playbook production.yml'
             }
         }
 
