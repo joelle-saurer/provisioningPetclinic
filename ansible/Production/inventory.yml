@@ -3,4 +3,4 @@
 
 [localhost:vars]
 ansible_ssh_user=joelle
-ansible_ssh_private_key=/home/joelle/.ssh/id_rsa
+
