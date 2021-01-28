@@ -13,7 +13,7 @@ pipeline{
             steps{ 
                         echo 'Tests are completed, release as production image'
                 
-                        sh 'cd /var/lib/jenkins/workspace/petProduction/ansible/Production/; ansible-playbook -i /var/lib/jenkins/workspace/petProduction/ansible/Production/inventory.yml production.yml'
+                        sh 'cd /var/lib/jenkins/workspace/petProduction/ansible/Production/; ansible-playbook production.yml'
             }
         }
 
