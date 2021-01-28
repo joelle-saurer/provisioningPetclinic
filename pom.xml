@@ -31,7 +31,7 @@
         <webjars-jquery-ui.version>1.12.1</webjars-jquery-ui.version>
         <webjars-jquery.version>3.5.1</webjars-jquery.version>
         <wro4j.version>1.8.0</wro4j.version> <!-- wro4j 1.0.0 requires Java 9 -->
-  <!-- Demo -->
+  <!-- Demo s-->
         <!-- Java EE / Java SE dependencies -->
         <tomcat.version>9.0.39</tomcat.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
