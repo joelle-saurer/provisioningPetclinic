@@ -1,6 +1,7 @@
 ---
 - hosts: localhost #Azure Terraform VM
   gather_facts: True
+  become: yes
   tasks:
  
 
