@@ -7,7 +7,11 @@ pipeline{
      
     }
 
-    stages {   
+    stages { 
+        stage ('clone repo') {
+            sh 'git clone https://github.com/joelle-saurer/provisioningPetclinic.git'
+        }  
+        
         stage('Release production image') {
             steps{ 
                         echo 'Tests are completed, release as production image'
