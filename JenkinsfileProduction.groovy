@@ -7,12 +7,7 @@ pipeline{
      
     }
 
-    stages { 
-        stage('clone repo') {
-            steps{
-                sh 'git clone https://github.com/joelle-saurer/provisioningPetclinic.git'
-            }
-        }  
+    stages {  
 
         stage('Release production image') {
             steps{ 
